@@ -1,29 +1,11 @@
 import React, { useState } from 'react';
+import { ArrowUpRight, ArrowRight, Check, Clock, MapPin, X } from 'lucide-react';
 import {
-  Scissors,
-  Sparkles,
-  Calendar,
-  ChevronDown,
-  ChevronUp,
-  Layers,
-  RotateCcw,
-  Check,
-  Clock,
-  MapPin,
-  X,
-} from 'lucide-react';
-import { useTheme } from 'next-themes';
-import { Salon3DCanvas } from './salon-3d-canvas';
-import {
-  SALON_FINISHES,
-  SALON_FOCUS_PRESETS,
-  getFocusPreset,
   validateBookingInput,
-  type SalonFinishId,
-  type SalonFocusId,
 } from '@/lib/salon-hero-config';
 
 const SALON_SERVICES = [
+  'Kids Haircut & Styling - Consultation at salon',
   'Signature Haircut & Blowout Styling — ₹950',
   'French Balayage & Gloss Hair Colour — ₹3,800',
   'Moroccan Argan & Keratin Silk Spa — ₹2,400',
@@ -33,8 +15,6 @@ const SALON_SERVICES = [
 const TIME_SLOTS = ['11:00 AM', '01:30 PM', '04:00 PM', '06:30 PM', '08:00 PM'];
 
 export const SalonHero: React.FC = () => {
-  const { theme, resolvedTheme } = useTheme();
-  const isDark = theme === 'dark' || resolvedTheme === 'dark';
 
   // Instant Chair Reservation Modal / Drawer State
   const [isBookingOpen, setIsBookingOpen] = useState<boolean>(false);
@@ -72,120 +52,41 @@ export const SalonHero: React.FC = () => {
     <section
       id="home"
       aria-label="Blossom Unisex Salon Hero Section"
-      className="relative min-h-screen w-full pt-16 overflow-hidden flex items-center bg-background text-foreground transition-colors duration-300"
+      className="blossom-hero"
     >
-      {/* Main Split Hero Container */}
-      <div className="relative z-10 max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 items-center gap-8 px-6 md:px-10 py-8 lg:py-12">
-        {/* Left Column: Clean Brand Story & Primary Actions (5 cols on desktop) */}
-        <div className="lg:col-span-5 flex flex-col items-start justify-center space-y-6 z-20">
-          {/* Unboxed Metadata Line */}
-          <div className="flex flex-wrap items-center gap-2 text-xs tracking-wide text-muted-foreground">
-            <span className="font-semibold text-[#e60073] dark:text-[#ff3b9a]">BLOSSOM Unisex Salon</span>
-            <span aria-hidden="true">·</span>
-            <span>Alkapuri &amp; Bhayli, Vadodara</span>
-            <span aria-hidden="true">·</span>
-            <span className="font-mono tabular-nums">10:00 AM – 09:00 PM</span>
+      <div className="blossom-hero-inner">
+        <div className="blossom-hero-copy">
+          <div className="blossom-hero-eyebrow"><span /> YOUR FAMILY. YOUR STYLE. YOUR SALON.</div>
+          <h1>A little care.<br />A whole new<br /><em>you.</em><span className="blossom-hero-star" aria-hidden="true">&#10035;</span></h1>
+          <p className="blossom-hero-description">Great hair days are for everyone. Discover thoughtful styling, beauty and grooming for women, men and little ones &mdash; all at Blossom.</p>
+          <div className="blossom-hero-actions">
+            <button type="button" className="blossom-hero-book" onClick={() => { setBookingError(null); setIsBookingOpen(true); }}>Book your appointment <ArrowUpRight size={19} /></button>
+            <a href="#services" className="blossom-hero-explore">Explore our products <ArrowRight size={17} /></a>
           </div>
-
-          {/* Expressive Display Headline */}
-          <h1
-            className="font-serif font-semibold tracking-tight text-foreground leading-[1.05]"
-            style={{
-              fontSize: 'clamp(2.5rem, 4.2vw, 4.1rem)',
-              textWrap: 'balance',
-            }}
-          >
-            Where Signature Hair Styling Meets{' '}
-            <span className="italic font-normal text-[#e60073] dark:text-[#ff3b9a]">
-              Modern Elegance.
-            </span>
-          </h1>
-
-          {/* Clean Salon Body Copy */}
-          <p className="text-base leading-relaxed text-muted-foreground max-w-[52ch]">
-            Welcome to Blossom Unisex Salon in Vadodara — your destination for precision haircuts,
-            dimensional hair colour, keratin smoothing, and signature bridal &amp; grooming care.
-          </p>
-
-          {/* Primary & Secondary CTA Row */}
-          <div className="flex flex-wrap items-center gap-3 pt-1">
-            <button
-              type="button"
-              onClick={() => {
-                setBookingError(null);
-                setIsBookingOpen(true);
-              }}
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#1d072c] to-[#e60073] text-white text-sm font-semibold tracking-tight hover:opacity-95 transition-opacity cursor-pointer whitespace-nowrap shrink-0 shadow-[0_4px_18px_rgba(230,0,115,0.28)]"
-            >
-              Book Appointment
-            </button>
-
-            <a
-              href="#services"
-              className="px-5 py-3 rounded-xl border border-border bg-background hover:bg-muted text-foreground text-sm font-medium transition-colors flex items-center gap-2 cursor-pointer whitespace-nowrap shrink-0"
-            >
-              <Sparkles className="w-4 h-4 text-[#e60073] dark:text-[#ff3b9a]" />
-              <span>Our Products</span>
-            </a>
+          <div className="blossom-hero-details">
+            <span><MapPin size={15} /> Alkapuri &amp; Bhayli, Vadodara</span>
+            <span><Clock size={15} /> Daily, 10 AM &ndash; 9 PM</span>
           </div>
-
-          {/* Confirmed Reservation Readout or Clean Salon Proof */}
-          {confirmedBooking ? (
-            <div
-              role="status"
-              className="w-full p-3.5 rounded-xl border border-[#e60073]/40 bg-[#e60073]/10 text-xs flex items-center justify-between gap-3"
-            >
-              <div className="flex items-center gap-2.5 min-w-0">
-                <Check className="w-4 h-4 text-[#e60073] dark:text-[#ff3b9a] shrink-0" />
-                <div className="truncate">
-                  <span className="font-semibold text-foreground">{confirmedBooking.clientName}</span>
-                  <span className="text-muted-foreground"> · {confirmedBooking.service} at </span>
-                  <span className="font-mono tabular-nums font-medium text-foreground">
-                    {confirmedBooking.timeSlot}
-                  </span>
-                </div>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsBookingOpen(true)}
-                className="text-xs font-medium underline text-foreground hover:opacity-80 shrink-0 cursor-pointer"
-              >
-                Modify
-              </button>
-            </div>
-          ) : (
-            <div className="w-full pt-4 border-t border-border grid grid-cols-3 gap-4 text-left">
-              <div>
-                <div className="text-lg font-mono font-semibold tabular-nums text-foreground">
-                  4,800+
-                </div>
-                <div className="text-xs text-muted-foreground">Happy Clients / Yr</div>
-              </div>
-              <div>
-                <div className="text-lg font-mono font-semibold tabular-nums text-foreground">
-                  2 Studios
-                </div>
-                <div className="text-xs text-muted-foreground">Alkapuri &amp; Bhayli</div>
-              </div>
-              <div>
-                <div className="text-lg font-mono font-semibold tabular-nums text-foreground">
-                  4.9 ★
-                </div>
-                <div className="text-xs text-muted-foreground">Client Rating (1.2k)</div>
-              </div>
-            </div>
-          )}
+          {confirmedBooking && <div role="status" className="blossom-hero-confirmation"><Check size={17} /><span>{confirmedBooking.clientName}, your {confirmedBooking.service} is reserved for {confirmedBooking.timeSlot}.</span><button type="button" onClick={() => setIsBookingOpen(true)}>Modify</button></div>}
         </div>
-
-        {/* Right Column: Salon Showcase Viewport (7 cols on desktop) */}
-        <div className="lg:col-span-7 relative w-full h-[380px] sm:h-[480px] lg:h-[600px] flex items-center justify-center">
-          <Salon3DCanvas
-            finishId="obsidian-gold"
-            focusId="overview"
-            exploded={false}
-            isDark={isDark}
-          />
+        <div className="blossom-hero-gallery" aria-label="Styling for women, men and kids">
+          <figure className="blossom-portrait blossom-portrait-women">
+            <img src="/images/hero-women.jpg" alt="Soft waves and a natural, polished hairstyle" fetchPriority="high" width="900" height="1350" />
+            <figcaption><span>01 / WOMEN</span><strong>Express yourself.</strong><span>Hair &middot; Colour &middot; Beauty</span></figcaption>
+          </figure>
+          <div className="blossom-hero-side">
+            <figure className="blossom-portrait blossom-portrait-men">
+              <img src="/images/hero-men.jpg" alt="A clean, classic men's hairstyle" width="600" height="900" />
+              <figcaption><span>02 / MEN</span><strong>Own your look.</strong><span>Hair &middot; Beard &middot; Grooming</span></figcaption>
+            </figure>
+            <figure className="blossom-portrait blossom-portrait-kids">
+              <img src="/images/hero-kids.jpg" alt="A cheerful child with curly hair and a yellow hair bow" width="600" height="900" />
+              <figcaption><span>03 / KIDS</span><strong>Little looks. Big smiles.</strong></figcaption>
+            </figure>
+          </div>
+          <div className="blossom-hero-seal"><span>A LITTLE</span><span className="blossom-seal-flower" aria-hidden="true">&#10035;</span><span>BLOSSOM MAGIC</span></div>
         </div>
+        <div className="blossom-hero-bottom"><span>ONE SALON. EVERY GENERATION.</span><p>Precision cuts <i /> Beautiful colour <i /> Personal care</p><a href="#services" aria-label="Discover Blossom products">DISCOVER BLOSSOM <ArrowRight size={15} /></a></div>
       </div>
 
       {/* Interactive Chair Session Reservation Modal */}

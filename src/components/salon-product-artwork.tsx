@@ -377,7 +377,7 @@ export const RunwayBottleSvg: React.FC<RunwayBottleSvgProps> = ({ productIndex }
           textAnchor="middle"
           fill={p.labelText}
           fillOpacity="0.68"
-          fontFamily="'Plus Jakarta Sans', sans-serif"
+          fontFamily="'Manrope', sans-serif"
           fontWeight="500"
           fontSize="6.2"
           letterSpacing="2.4"
@@ -429,7 +429,7 @@ export const RunwayBottleSvg: React.FC<RunwayBottleSvgProps> = ({ productIndex }
           textAnchor="middle"
           fill={p.labelText}
           fillOpacity="0.72"
-          fontFamily="'Plus Jakarta Sans', sans-serif"
+          fontFamily="'Manrope', sans-serif"
           fontSize="6"
           letterSpacing="1.2"
         >
@@ -454,7 +454,7 @@ export const RunwayBottleSvg: React.FC<RunwayBottleSvgProps> = ({ productIndex }
           textAnchor="middle"
           fill={p.labelText}
           fillOpacity="0.68"
-          fontFamily="'JetBrains Mono', monospace"
+          fontFamily="'Manrope', sans-serif"
           fontSize="6"
           letterSpacing="1.3"
         >
@@ -548,7 +548,7 @@ export const CardProductSvg: React.FC<CardProductSvgProps> = ({ cardIndex }) => 
             textAnchor="middle"
             fill={p.labelText}
             fillOpacity="0.68"
-            fontFamily="'JetBrains Mono', monospace"
+            fontFamily="'Manrope', sans-serif"
             fontSize="5.2"
             letterSpacing="1"
           >
@@ -605,7 +605,7 @@ export const CardProductSvg: React.FC<CardProductSvgProps> = ({ cardIndex }) => 
             textAnchor="middle"
             fill={p.labelText}
             fillOpacity="0.7"
-            fontFamily="'Plus Jakarta Sans', sans-serif"
+            fontFamily="'Manrope', sans-serif"
             fontSize="5.5"
             letterSpacing="1.2"
           >

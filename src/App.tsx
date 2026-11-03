@@ -5,10 +5,8 @@
 
 import { NotchNavbar } from "@/components/ui/notch-navbar"
 import { SalonHero } from "@/components/salon-hero"
+import { SalonServices } from "@/components/salon-services"
 import { SalonServicesLookbook } from "@/components/salon-services-lookbook"
-import FlipCardDock from "@/components/mfa/FlipCardDock"
-import { HAIRCUT_DESIGNS } from "@/lib/haircut-dock-config"
-import { SalonScrollFlyMap } from "@/components/salon-scroll-fly-map"
 import { SalonFooter } from "@/components/salon-footer"
 import { ThemeProvider } from "next-themes"
 
@@ -19,11 +17,8 @@ export default function App() {
         <NotchNavbar />
         <main>
           <SalonHero />
+          <SalonServices />
           <SalonServicesLookbook />
-          <div id="haircuts" className="relative isolate h-svh min-h-[640px] w-full border-t border-zinc-200 pt-[68px] dark:border-zinc-800/80 bg-zinc-50 dark:bg-[#0c0c0e]">
-            <FlipCardDock people={HAIRCUT_DESIGNS} />
-          </div>
-          <SalonScrollFlyMap />
         </main>
         <SalonFooter />
       </div>

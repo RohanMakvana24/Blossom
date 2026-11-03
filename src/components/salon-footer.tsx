@@ -120,14 +120,8 @@ export function SalonFooter() {
     <footer
       id="footer"
       ref={footerRef}
-      className="relative overflow-hidden border-t border-zinc-200/90 bg-[#f8f4f7] text-zinc-900 transition-colors duration-300 dark:border-zinc-800/80 dark:bg-[#09060d] dark:text-zinc-100"
+      className="relative overflow-hidden bg-white text-zinc-900 transition-colors duration-300 dark:bg-[#09060d] dark:text-zinc-100"
     >
-      {/* Subtle Top Magenta-Pink Hairline */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#e60073]/70 to-transparent"
-      />
-
       <div className="mx-auto max-w-[1360px] px-6 pt-16 pb-10 sm:px-10 lg:px-12 lg:pt-20">
         {/* Main Clean 12-Column Grid */}
         <div className="grid grid-cols-1 gap-12 border-b border-zinc-200/90 pb-14 lg:grid-cols-12 lg:gap-10 dark:border-zinc-800/80">

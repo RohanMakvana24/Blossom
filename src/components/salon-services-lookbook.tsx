@@ -454,7 +454,8 @@ export const SalonServicesLookbook: React.FC = () => {
       </div>
 
       {/* Main Runway Stage + Synchronized Product Cards Rail */}
-      <div ref={mainRef} className="vell-main">
+      <div className="vell-main-wrapper">
+        <div ref={mainRef} className="vell-main">
         <section
           ref={stageRef}
           className="stage"
@@ -575,6 +576,7 @@ export const SalonServicesLookbook: React.FC = () => {
           })}
         </aside>
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 };

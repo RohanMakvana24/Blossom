@@ -5,7 +5,6 @@ import {
   ArrowUpRight,
   Home,
   Sparkles,
-  Scissors,
   MapPin,
   Menu,
   X,
@@ -29,7 +28,7 @@ const NavLink = ({
 }) => (
   <Link
     href={href}
-    className="group flex items-center gap-1.5 text-sm font-medium text-zinc-700 hover:text-[#e60073] dark:text-zinc-200 dark:hover:text-[#ff3b9a] transition-colors whitespace-nowrap"
+    className="group flex items-center gap-1.5 text-sm font-medium text-zinc-200 hover:text-[#e60073] dark:text-zinc-200 dark:hover:text-[#ff3b9a] transition-colors whitespace-nowrap"
   >
     <Icon className="w-4 h-4 text-[#e60073] dark:text-[#ff3b9a] opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all" />
     <span>{label}</span>
@@ -49,7 +48,7 @@ const MobileThemeToggle = () => {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-[#e60073]/10 transition-colors text-zinc-700 dark:text-zinc-200 hover:text-[#e60073]"
+      className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-[#e60073]/10 transition-colors text-zinc-200 dark:text-zinc-200 hover:text-[#e60073]"
       aria-label="Toggle theme"
     >
       {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -66,10 +65,10 @@ export function NotchNavbar({
   const items = {
     left: [
       { label: "Home", href: "#home", icon: Home },
+      { label: "Our Services", href: "#our-services", icon: Sparkles },
       { label: "Our Products", href: "#services", icon: Sparkles },
-      { label: "Haircuts", href: "#haircuts", icon: Scissors },
     ],
-    right: [{ label: "Studio Map", href: "#location", icon: MapPin }],
+    right: [{ label: "Contact", href: "#footer", icon: MapPin }],
   }
 
   return (
@@ -79,7 +78,7 @@ export function NotchNavbar({
         {...props}
       >
         {/* Left Side Bar - Flexible width */}
-        <div className="flex-1 h-10 bg-white/95 dark:bg-[#09060d]/95 backdrop-blur-md z-20 relative min-w-0">
+        <div className="flex-1 h-10 bg-black backdrop-blur-md z-20 relative min-w-0">
           <svg
             className="absolute inset-0 w-full h-full"
             preserveAspectRatio="none"
@@ -101,7 +100,7 @@ export function NotchNavbar({
               stroke="currentColor"
               strokeOpacity={0.08}
               strokeWidth={0.6}
-              className="text-foreground"
+              className="text-white"
             />
           </svg>
         </div>
@@ -111,7 +110,7 @@ export function NotchNavbar({
           {/* Left Slice (Corner) */}
           <div className="w-[50px] h-full relative shrink-0">
             <div
-              className="absolute inset-0 bg-white/95 dark:bg-[#09060d]/95 backdrop-blur-md"
+              className="absolute inset-0 bg-black backdrop-blur-md"
               style={{
                 clipPath: "path('M0 0 H50 V68 C25 68 25 40 0 40 Z')",
               }}
@@ -133,7 +132,7 @@ export function NotchNavbar({
                 stroke="currentColor"
                 strokeOpacity={0.08}
                 strokeWidth={0.6}
-                className="text-foreground"
+                className="text-white"
               />
             </svg>
           </div>
@@ -141,7 +140,7 @@ export function NotchNavbar({
           {/* Center Slice (Flexible Content Area) */}
           <div className="flex-1 h-full relative min-w-0 -ml-px">
             {/* Background & Lines Layer */}
-            <div className="absolute inset-0 bg-white/95 dark:bg-[#09060d]/95 backdrop-blur-md">
+            <div className="absolute inset-0 bg-black backdrop-blur-md">
               <svg
                 className="absolute inset-0 w-full h-full pointer-events-none"
                 preserveAspectRatio="none"
@@ -163,7 +162,7 @@ export function NotchNavbar({
                   stroke="currentColor"
                   strokeOpacity={0.08}
                   strokeWidth={0.6}
-                  className="text-foreground"
+                  className="text-white"
                 />
               </svg>
             </div>
@@ -183,7 +182,7 @@ export function NotchNavbar({
               {/* Mobile Menu Button (Left) */}
               <div className="flex md:hidden h-10 items-center">
                 <button
-                  className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-[#e60073]/10 text-zinc-700 dark:text-zinc-200 hover:text-[#e60073] transition-colors"
+                  className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-[#e60073]/10 text-zinc-200 dark:text-zinc-200 hover:text-[#e60073] transition-colors"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                   aria-label="Toggle menu"
                 >
@@ -204,15 +203,9 @@ export function NotchNavbar({
                     data-testid="navbar-blossom-logo"
                     className="group relative flex items-center justify-center transition-transform duration-300 hover:scale-105"
                   >
-                    {/* Light Mode: Obsidian Black Letters + Hot-Pink Lotus O */}
-                    <LogoIcon
-                      variant="obsidian"
-                      className="h-6 sm:h-7 md:h-[32px] w-auto block dark:hidden drop-shadow-[0_2px_8px_rgba(230,0,115,0.18)]"
-                    />
-                    {/* Dark Mode (on Black Navbar): Crisp Pearl Letters + Hot-Pink Lotus O */}
                     <LogoIcon
                       variant="light"
-                      className="h-6 sm:h-7 md:h-[32px] w-auto hidden dark:block drop-shadow-[0_2px_12px_rgba(240,18,122,0.34)]"
+                      className="h-[18px] sm:h-5 md:h-[22px] w-auto block drop-shadow-[0_2px_12px_rgba(240,18,122,0.2)]"
                     />
                   </Link>
                 )}
@@ -227,10 +220,10 @@ export function NotchNavbar({
                   <NavLink key={item.label} {...item} />
                 ))}
 
-                <div className="flex h-9 gap-3.5 pl-4 border-l border-zinc-200 dark:border-zinc-800 shrink-0 items-center">
-                  <ThemeToggle />
+                <div className="flex h-9 gap-3.5 pl-4 border-l border-zinc-800 shrink-0 items-center">
+                  <div className="text-zinc-200 [&_button]:text-zinc-200 [&_button:hover]:bg-white/10 [&_button:hover]:text-white"><ThemeToggle /></div>
                   <Link
-                    href="#haircuts"
+                    href="#footer"
                     className="group inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-[#1b0829] via-[#2d0c42] to-[#e60073] hover:from-[#e60073] hover:to-[#b8005c] rounded-full transition-all duration-300 shadow-[0_2px_14px_rgba(230,0,115,0.3)] whitespace-nowrap"
                   >
                     <span>Book Session</span>
@@ -249,7 +242,7 @@ export function NotchNavbar({
           {/* Right Slice (Corner) */}
           <div className="w-[50px] h-full relative shrink-0 -ml-px">
             <div
-              className="absolute inset-0 bg-white/95 dark:bg-[#09060d]/95 backdrop-blur-md"
+              className="absolute inset-0 bg-black backdrop-blur-md"
               style={{
                 clipPath: "path('M0 0 H50 V40 C25 40 25 68 0 68 Z')",
               }}
@@ -271,14 +264,14 @@ export function NotchNavbar({
                 stroke="currentColor"
                 strokeOpacity={0.08}
                 strokeWidth={0.6}
-                className="text-foreground"
+                className="text-white"
               />
             </svg>
           </div>
         </div>
 
         {/* Right Side Bar - Flexible width */}
-        <div className="flex-1 h-10 bg-white/95 dark:bg-[#09060d]/95 backdrop-blur-md z-20 relative min-w-0 -ml-px">
+        <div className="flex-1 h-10 bg-black backdrop-blur-md z-20 relative min-w-0 -ml-px">
           <svg
             className="absolute inset-0 w-full h-full"
             preserveAspectRatio="none"
@@ -300,7 +293,7 @@ export function NotchNavbar({
               stroke="currentColor"
               strokeOpacity={0.08}
               strokeWidth={0.6}
-              className="text-foreground"
+              className="text-white"
             />
           </svg>
         </div>
@@ -314,7 +307,7 @@ export function NotchNavbar({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[68px] z-[490] bg-white dark:bg-[#09060d] border-b border-[#e60073]/25 p-4 md:hidden shadow-lg"
+            className="fixed inset-x-0 top-[68px] z-[490] bg-black text-zinc-200 border-b border-[#e60073]/25 p-4 md:hidden shadow-lg"
           >
             <nav className="flex flex-col gap-2" aria-label="Mobile navigation">
               {[...items.left, ...items.right].map((item) => (
@@ -325,15 +318,15 @@ export function NotchNavbar({
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <item.icon className="w-5 h-5 text-[#e60073]" />
-                  <span className="font-medium text-foreground/90">
+                  <span className="font-medium text-zinc-200">
                     {item.label}
                   </span>
                 </Link>
               ))}
-              <div className="h-px bg-foreground/10 my-2" />
+              <div className="h-px bg-white/10 my-2" />
               <div className="flex flex-col gap-2">
                 <Link
-                  href="#haircuts"
+                  href="#footer"
                   className="flex items-center justify-center gap-2 p-3 rounded-full bg-gradient-to-r from-[#1b0829] to-[#e60073] text-white font-semibold text-sm"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >

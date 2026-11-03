@@ -56,18 +56,18 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     links: [
       { label: 'Home', href: '#home' },
       { label: 'Our Products', href: '#services' },
-      { label: 'Signature Haircuts', href: '#haircuts' },
-      { label: 'Book Appointment', href: '#haircuts' },
+      { label: 'Book Appointment', href: '#footer' },
+      { label: 'Studio Locations', href: '#footer' },
     ],
   },
   {
     id: 'services',
     title: 'Unisex Services',
     links: [
-      { label: 'Haircut & Styling', href: '#haircuts' },
-      { label: 'Balayage & Hair Colour', href: '#haircuts' },
+      { label: 'Haircut & Styling', href: '#services' },
+      { label: 'Balayage & Hair Colour', href: '#services' },
       { label: '24K Keratin & Hair Spa', href: '#services' },
-      { label: 'Bridal & Grooming', href: '#haircuts' },
+      { label: 'Bridal & Grooming', href: '#services' },
     ],
   },
   {
