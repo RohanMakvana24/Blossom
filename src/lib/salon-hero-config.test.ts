@@ -3,9 +3,11 @@ import assert from 'node:assert/strict';
 import {
   getFinishPreset,
   getFocusPreset,
+  getHeroSpotlight,
   validateBookingInput,
   SALON_FINISHES,
   SALON_FOCUS_PRESETS,
+  HERO_SPOTLIGHTS,
 } from './salon-hero-config';
 
 test('getFinishPreset returns matching finish preset and falls back safely', () => {
@@ -19,6 +21,14 @@ test('getFocusPreset returns camera coordinates and target for each 3D spotlight
   assert.equal(shears.id, 'shears');
   assert.equal(shears.cameraPos.length, 3);
   assert.equal(SALON_FOCUS_PRESETS.length, 4);
+});
+
+test('getHeroSpotlight returns matching editorial spotlight and falls back safely', () => {
+  assert.equal(HERO_SPOTLIGHTS.length, 3);
+  const men = getHeroSpotlight('men');
+  assert.equal(men.id, 'men');
+  assert.equal(men.startingPrice, '₹199');
+  assert.equal(men.defaultService, 'Grooming');
 });
 
 test('validateBookingInput enforces non-empty client name, service, and time slot', () => {
@@ -35,3 +45,4 @@ test('validateBookingInput enforces non-empty client name, service, and time slo
     true
   );
 });
+

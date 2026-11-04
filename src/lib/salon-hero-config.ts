@@ -126,3 +126,89 @@ export function getFinishPreset(id: SalonFinishId): SalonFinishPreset {
 export function getFocusPreset(id: SalonFocusId): SalonFocusPreset {
   return SALON_FOCUS_PRESETS.find((f) => f.id === id) ?? SALON_FOCUS_PRESETS[0];
 }
+
+export type HeroSpotlightId = 'women' | 'men' | 'bridal';
+
+export interface HeroSpotlight {
+  id: HeroSpotlightId;
+  index: string;
+  tabLabel: string;
+  kicker: string;
+  headline: string;
+  accentWord: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  secondaryImage: string;
+  secondaryAlt: string;
+  secondaryCaption: string;
+  defaultService: string;
+  highlights: string[];
+  startingPrice: string;
+  duration: string;
+}
+
+export const HERO_SPOTLIGHTS: HeroSpotlight[] = [
+  {
+    id: 'women',
+    index: '01',
+    tabLabel: 'Women’s Couture',
+    kicker: 'HAIR · COLOUR · TEXTURE ATELIER',
+    headline: 'Sculpted elegance for every',
+    accentWord: 'occasion.',
+    description:
+      'Dimensional balayage, keratin glass-hair rituals, precision layered cuts, and botanical scalp therapy tailored by senior stylists at Kotecha Circle.',
+    image: '/images/hero-women.jpg',
+    imageAlt: 'Radiant woman with soft dimensional waves and polished salon finish',
+    secondaryImage: '/images/hero-kids.jpg',
+    secondaryAlt: 'Joyful child portrait after a gentle family salon styling session',
+    secondaryCaption: 'Gentle kids & family styling',
+    defaultService: 'Haircut & Styling',
+    highlights: ['Dimensional Balayage & Gloss', '24K Keratin Smoothing', 'Precision Layering & Blowout'],
+    startingPrice: '₹399',
+    duration: '45 – 90 min',
+  },
+  {
+    id: 'men',
+    index: '02',
+    tabLabel: 'Men’s Grooming',
+    kicker: 'SHARP FADES · BEARD ARCHITECTURE · DETOX',
+    headline: 'Tailored precision & modern',
+    accentWord: 'craft.',
+    description:
+      'Executive skin fades, classic scissor work, hot-towel razor beard sculpting, and revitalizing charcoal detan facials built for effortless confidence.',
+    image: '/images/hero-men.jpg',
+    imageAlt: 'Sharp classic men’s haircut and structured beard grooming',
+    secondaryImage: '/images/hero-women.jpg',
+    secondaryAlt: 'Signature salon finish and colour consultation',
+    secondaryCaption: 'Unisex styling & texture bar',
+    defaultService: 'Grooming',
+    highlights: ['Executive Fade & Scissor Cut', 'Hot-Towel Beard Sculpt', 'Hydra-Detox Express Facial'],
+    startingPrice: '₹199',
+    duration: '30 – 60 min',
+  },
+  {
+    id: 'bridal',
+    index: '03',
+    tabLabel: 'Bridal & Skin',
+    kicker: 'HD MAKEUP · HYDRA-GLOW · NAIL COUTURE',
+    headline: 'Luminous artistry for timeless',
+    accentWord: 'moments.',
+    description:
+      'Bespoke bridal & reception makeup, luxury dermal facials, and custom gel nail extensions crafted in a calm, private suite above Fitness 5 Gym.',
+    image: '/images/hero-women.jpg',
+    imageAlt: 'Luminous bridal and occasion skin and hair artistry',
+    secondaryImage: '/images/hero-men.jpg',
+    secondaryAlt: 'Groom and occasion styling at Blossom Family Salon',
+    secondaryCaption: 'Couple & pre-wedding packages',
+    defaultService: 'Makeup',
+    highlights: ['HD & Airbrush Bridal Makeup', 'Signature Hydra-Glow Facial', 'Bespoke Gel Nail Extensions'],
+    startingPrice: '₹999',
+    duration: '60 – 120 min',
+  },
+];
+
+export function getHeroSpotlight(id: HeroSpotlightId): HeroSpotlight {
+  return HERO_SPOTLIGHTS.find((item) => item.id === id) ?? HERO_SPOTLIGHTS[0];
+}
+
