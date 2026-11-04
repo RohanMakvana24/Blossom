@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
+import { whatsappEnquiry } from '@/lib/salon-contact';
 import {
   CutoutCard, CutoutCardAction, CutoutCardContent, CutoutCardFooter,
   CutoutCardImage, CutoutCardInsetLabel, CutoutCardMedia, CutoutCardOverlay,
@@ -10,12 +11,12 @@ import {
 } from '@/components/ui/cutout-card';
 
 const services = [
-  { id: 'haircut', title: 'Haircut & Styling', tag: 'YOUR SIGNATURE LOOK', audience: 'Women, men & kids', description: 'Precision cuts, fresh blowouts and effortless styling. A look that feels completely you.', alt: '3D pink hairdryer, silver scissors and salon comb', tone: 'rose' },
-  { id: 'hair-color', title: 'Hair Color & Treatments', tag: 'COLOUR WITH CONFIDENCE', audience: 'Colour & hair rituals', description: 'From subtle highlights to a whole new shade, with nourishing care for beautiful, glossy hair.', alt: '3D hair colour bowl, tint brush, treatment bottle and glossy hair swatch', tone: 'peach' },
-  { id: 'facial', title: 'Skin & Facial Care', tag: 'A MOMENT TO GLOW', audience: 'Skin & self-care', description: 'Unwind with cleansing facials and skin rituals that leave you feeling refreshed and radiant.', alt: '3D facial cream, jade gua sha, spa towel and serum bottle', tone: 'sage' },
-  { id: 'makeup', title: 'Bridal & Party Makeup', tag: 'MADE FOR YOUR MOMENT', audience: 'Bridal & celebrations', description: 'Soft glamour or a statement look. Thoughtful makeup for your most memorable moments.', alt: '3D luxury makeup brush, lipstick, eyeshadow and bridal pearl hairpin', tone: 'lilac' },
-  { id: 'nails', title: 'Nail & Beauty Care', tag: 'THE FINISHING TOUCH', audience: 'Nails & beauty rituals', description: 'Beautiful nails, polished details and a little everyday indulgence, all in one place.', alt: '3D blush and berry nail polish bottles, manicure file and beauty cream', tone: 'pink' },
-  { id: 'grooming', title: "Men’s Grooming", tag: 'SHARP IN EVERY DETAIL', audience: 'Hair, beard & grooming', description: 'Clean fades, tailored beard shaping and classic grooming. Leave looking sharp and feeling fresh.', alt: '3D electric clipper, chrome razor, shaving brush and beard oil', tone: 'sand' },
+  { id: 'haircut', title: 'Haircut & Styling', tag: 'FIND YOUR LOOK', audience: 'Hair for the family', description: 'Haircuts and styling for a fresh look. Ask our team about options for you or your family.', alt: 'Illustration of a hairdryer, scissors and salon comb', tone: 'rose' },
+  { id: 'hair-color', title: 'Hair Colour & Care', tag: 'A NEW SHADE', audience: 'Hair colour & care', description: 'Explore hair colour and care services with our salon team.', alt: 'Illustration of hair colour tools and care products', tone: 'peach' },
+  { id: 'facial', title: 'Skin & Facial Care', tag: 'TIME FOR YOU', audience: 'Skin care', description: 'Ask about skin and facial care suited to your preferences.', alt: 'Illustration of facial care products', tone: 'sage' },
+  { id: 'makeup', title: 'Makeup', tag: 'FOR THE OCCASION', audience: 'Makeup', description: 'Get in touch about makeup for an event or a look you have in mind.', alt: 'Illustration of makeup tools', tone: 'lilac' },
+  { id: 'nails', title: 'Nail Art & Beauty', tag: 'THE DETAILS', audience: 'Nail art', description: 'Explore nail art and beauty services at our Rajkot salon.', alt: 'Illustration of nail care products', tone: 'pink' },
+  { id: 'grooming', title: 'Grooming', tag: 'LOOK YOUR WAY', audience: 'Grooming', description: 'Contact us about grooming services and current availability.', alt: 'Illustration of grooming tools', tone: 'sand' },
 ];
 
 export function SalonServices() {
@@ -56,7 +57,7 @@ export function SalonServices() {
       <header className="salon-services-heading">
         <div><p className="salon-services-eyebrow"><span /> THE BLOSSOM EXPERIENCE</p>
           <h2 id="salon-services-title">Our <em>Services.</em></h2></div>
-        <p>A little refresh. A big transformation.<br />Expert care for every version of you.</p>
+        <p>Hair, skin, nails, makeup and grooming.<br />Contact us for details and availability.</p>
       </header>
       <div ref={sliderRef} className="salon-services-grid" role="region" aria-label="Our services cards" tabIndex={0} onKeyDown={event => {
         if (!window.matchMedia('(max-width: 600px)').matches) return;
@@ -76,7 +77,7 @@ export function SalonServices() {
               <motion.div variants={stagger.item}><CutoutCardFooter><span>{service.audience}</span></CutoutCardFooter></motion.div>
             </motion.div>
           </CutoutCardContent>
-          <CutoutCardAction><a href="#footer" aria-label={`Enquire about ${service.title}`}><ArrowUpRight size={20} /></a></CutoutCardAction>
+          <CutoutCardAction><a href={whatsappEnquiry(`Hello Blossom Family Salon, I would like to enquire about ${service.title}.`)} target="_blank" rel="noopener noreferrer" aria-label={`Enquire about ${service.title} on WhatsApp`}><ArrowUpRight size={20} /></a></CutoutCardAction>
         </CutoutCard></div>)}
       </div>
       <div className="services-slider-controls">
@@ -84,7 +85,7 @@ export function SalonServices() {
         <div className="services-slider-dots">{services.map((service, index) => <button type="button" key={service.id} aria-label={`Show ${service.title}`} aria-current={activeSlide === index ? 'true' : undefined} onClick={() => goToSlide(index)} />)}</div>
         <button type="button" onClick={() => goToSlide(activeSlide + 1)} disabled={activeSlide === services.length - 1} aria-label="Next service"><ArrowRight size={17} /></button>
       </div>
-      <p className="salon-services-note">Not sure where to start? <a href="#footer">Let’s find your perfect service <ArrowUpRight size={14} /></a></p>
+      <p className="salon-services-note">Not sure where to start? <a href={whatsappEnquiry()} target="_blank" rel="noopener noreferrer">Ask our team <ArrowUpRight size={14} /></a></p>
     </div>
   </section>;
 }

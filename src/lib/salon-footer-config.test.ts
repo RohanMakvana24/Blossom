@@ -1,30 +1,16 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import {
-  FOOTER_COLUMNS,
-  SALON_BRANCHES,
-  validateVipRequest,
-  getBranchById,
-} from './salon-footer-config';
+import { FOOTER_COLUMNS, SALON_BRANCHES, getBranchById } from './salon-footer-config';
 
-test('FOOTER_COLUMNS and SALON_BRANCHES provide clean Rajkot & Vadodara studio data and navigation', () => {
-  assert.equal(FOOTER_COLUMNS.length, 3);
-  assert.equal(SALON_BRANCHES.length, 3);
+test('only the Kotecha Circle Rajkot location is listed', () => {
+  assert.equal(SALON_BRANCHES.length, 1);
   assert.equal(SALON_BRANCHES[0].city, 'Rajkot');
-  assert.equal(SALON_BRANCHES[0].phone, '096380 55173');
-  for (const col of FOOTER_COLUMNS) {
-    assert.equal(col.links.length, 4);
-  }
-});
-
-test('validateVipRequest validates email addresses and 10-digit phone numbers', () => {
-  assert.equal(validateVipRequest('   ').valid, false);
-  assert.equal(validateVipRequest('invalid-input').valid, false);
-  assert.equal(validateVipRequest('client@zacksalon.in').valid, true);
-  assert.equal(validateVipRequest('+91 98765 43210').valid, true);
-});
-
-test('getBranchById returns matching branch or falls back to Rajkot Kotecha Circle studio', () => {
-  assert.equal(getBranchById('bhayli-prive').area, 'Sevasi · Bhayli');
+  assert.match(SALON_BRANCHES[0].address, /Karunanidhan Complex/);
   assert.equal(getBranchById('unknown').id, 'rajkot-kotecha');
+});
+
+test('footer links point to live site sections or contact destinations', () => {
+  const links = FOOTER_COLUMNS.flatMap(column => column.links);
+  assert.ok(links.every(link => ['#home', '#our-services', '#about'].includes(link.href) || link.href.startsWith('https://')));
+  assert.ok(links.some(link => link.href.includes('wa.me/919638055173')));
 });

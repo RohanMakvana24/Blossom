@@ -421,7 +421,7 @@ export const RunwayBottleSvg: React.FC<RunwayBottleSvgProps> = ({ productIndex }
           fontSize="10.5"
           letterSpacing="1.5"
         >
-          {p.title}
+          {`CARE CONCEPT ${String(productIndex + 1).padStart(2, '0')}`}
         </text>
         <text
           x="110"
@@ -433,7 +433,7 @@ export const RunwayBottleSvg: React.FC<RunwayBottleSvgProps> = ({ productIndex }
           fontSize="6"
           letterSpacing="1.2"
         >
-          {p.subtitle}
+          ILLUSTRATIVE ONLY
         </text>
 
         {/* Gold Emblem Seal */}
@@ -458,7 +458,7 @@ export const RunwayBottleSvg: React.FC<RunwayBottleSvgProps> = ({ productIndex }
           fontSize="6"
           letterSpacing="1.3"
         >
-          {p.volume}
+          DESIGN MOCKUP
         </text>
       </g>
     </svg>
@@ -539,7 +539,7 @@ export const CardProductSvg: React.FC<CardProductSvgProps> = ({ cardIndex }) => 
             fontSize="7.8"
             letterSpacing="1.2"
           >
-            {p.title}
+            CONCEPT ONLY
           </text>
           <circle cx="120" cy="142" r="6" fill="none" stroke={`url(#${uid}-metal)`} strokeWidth="1" />
           <text
@@ -552,7 +552,7 @@ export const CardProductSvg: React.FC<CardProductSvgProps> = ({ cardIndex }) => 
             fontSize="5.2"
             letterSpacing="1"
           >
-            {p.volume}
+            DESIGN MOCKUP
           </text>
         </g>
       ) : (
@@ -597,7 +597,7 @@ export const CardProductSvg: React.FC<CardProductSvgProps> = ({ cardIndex }) => 
             fontSize="8"
             letterSpacing="1.4"
           >
-            {p.title}
+            CONCEPT ONLY
           </text>
           <text
             x="120"

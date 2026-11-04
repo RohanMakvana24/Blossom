@@ -1,32 +1,44 @@
-import React, { useState } from 'react';
-import { ArrowUpRight, ArrowRight, Check, Clock, MapPin, X } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { ArrowUpRight, ArrowRight, MapPin, X } from 'lucide-react';
+import { whatsappEnquiry } from '@/lib/salon-contact';
 import {
   validateBookingInput,
 } from '@/lib/salon-hero-config';
 
 const SALON_SERVICES = [
-  'Kids Haircut & Styling - Consultation at salon',
-  'Signature Haircut & Blowout Styling — ₹950',
-  'French Balayage & Gloss Hair Colour — ₹3,800',
-  'Moroccan Argan & Keratin Silk Spa — ₹2,400',
-  'Classic Beard Trim & Hot-Towel Grooming — ₹650',
+  'Haircut & Styling',
+  'Hair Colour & Care',
+  'Skin & Facial Care',
+  'Makeup',
+  'Nail Art',
+  'Grooming',
 ];
-
-const TIME_SLOTS = ['11:00 AM', '01:30 PM', '04:00 PM', '06:30 PM', '08:00 PM'];
 
 export const SalonHero: React.FC = () => {
 
-  // Instant Chair Reservation Modal / Drawer State
   const [isBookingOpen, setIsBookingOpen] = useState<boolean>(false);
+  const bookingButtonRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const [clientName, setClientName] = useState<string>('');
   const [selectedService, setSelectedService] = useState<string>(SALON_SERVICES[0]);
-  const [selectedSlot, setSelectedSlot] = useState<string>(TIME_SLOTS[2]);
+  const [selectedSlot, setSelectedSlot] = useState<string>('');
   const [bookingError, setBookingError] = useState<string | null>(null);
-  const [confirmedBooking, setConfirmedBooking] = useState<{
-    clientName: string;
-    service: string;
-    timeSlot: string;
-  } | null>(null);
+
+  useEffect(() => {
+    if (!isBookingOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    closeButtonRef.current?.focus();
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsBookingOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', onKeyDown);
+      bookingButtonRef.current?.focus();
+    };
+  }, [isBookingOpen]);
 
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,34 +52,29 @@ export const SalonHero: React.FC = () => {
       return;
     }
     setBookingError(null);
-    setConfirmedBooking({
-      clientName: clientName.trim(),
-      service: selectedService.split(' — ')[0],
-      timeSlot: selectedSlot,
-    });
+    window.open(whatsappEnquiry(`Hello Blossom Family Salon, I would like to enquire about an appointment.\nName: ${clientName.trim()}\nService: ${selectedService}\nPreferred date/time: ${selectedSlot.trim()}\nPlease confirm availability.`), '_blank', 'noopener,noreferrer');
     setIsBookingOpen(false);
   };
 
   return (
     <section
       id="home"
-      aria-label="Blossom Unisex Salon Hero Section"
+      aria-label="Blossom Family Salon in Rajkot"
       className="blossom-hero"
     >
       <div className="blossom-hero-inner">
         <div className="blossom-hero-copy">
-          <div className="blossom-hero-eyebrow"><span /> YOUR FAMILY. YOUR STYLE. YOUR SALON.</div>
+          <div className="blossom-hero-eyebrow"><span /> BLOSSOM FAMILY SALON · RAJKOT</div>
           <h1>A little care.<br />A whole new<br /><em>you.</em><span className="blossom-hero-star" aria-hidden="true">&#10035;</span></h1>
-          <p className="blossom-hero-description">Great hair days are for everyone. Discover thoughtful styling, beauty and grooming for women, men and little ones &mdash; all at Blossom.</p>
+          <p className="blossom-hero-description">Hair, beauty, nail art, makeup and grooming at our Kotecha Circle salon in Rajkot. Get in touch to find the right service for you.</p>
           <div className="blossom-hero-actions">
-            <button type="button" className="blossom-hero-book" onClick={() => { setBookingError(null); setIsBookingOpen(true); }}>Book your appointment <ArrowUpRight size={19} /></button>
-            <a href="#services" className="blossom-hero-explore">Explore our products <ArrowRight size={17} /></a>
+            <button ref={bookingButtonRef} type="button" className="blossom-hero-book" onClick={() => { setBookingError(null); setIsBookingOpen(true); }}>Enquire on WhatsApp <ArrowUpRight size={19} /></button>
+            <a href="#our-services" className="blossom-hero-explore">Explore our services <ArrowRight size={17} /></a>
           </div>
           <div className="blossom-hero-details">
-            <span><MapPin size={15} /> Alkapuri &amp; Bhayli, Vadodara</span>
-            <span><Clock size={15} /> Daily, 10 AM &ndash; 9 PM</span>
+            <span><MapPin size={15} /> Kotecha Circle, Rajkot</span>
+            <span>Images are illustrative</span>
           </div>
-          {confirmedBooking && <div role="status" className="blossom-hero-confirmation"><Check size={17} /><span>{confirmedBooking.clientName}, your {confirmedBooking.service} is reserved for {confirmedBooking.timeSlot}.</span><button type="button" onClick={() => setIsBookingOpen(true)}>Modify</button></div>}
         </div>
         <div className="blossom-hero-gallery" aria-label="Styling for women, men and kids">
           <figure className="blossom-portrait blossom-portrait-women">
@@ -86,10 +93,10 @@ export const SalonHero: React.FC = () => {
           </div>
           <div className="blossom-hero-seal"><span>A LITTLE</span><span className="blossom-seal-flower" aria-hidden="true">&#10035;</span><span>BLOSSOM MAGIC</span></div>
         </div>
-        <div className="blossom-hero-bottom"><span>ONE SALON. EVERY GENERATION.</span><p>Precision cuts <i /> Beautiful colour <i /> Personal care</p><a href="#services" aria-label="Discover Blossom products">DISCOVER BLOSSOM <ArrowRight size={15} /></a></div>
+        <div className="blossom-hero-bottom"><span>ONE SALON. EVERY GENERATION.</span><p>Hair <i /> Beauty <i /> Personal care</p><a href="#our-services" aria-label="Discover Blossom services">DISCOVER BLOSSOM <ArrowRight size={15} /></a></div>
       </div>
 
-      {/* Interactive Chair Session Reservation Modal */}
+      {/* WhatsApp appointment enquiry */}
       {isBookingOpen && (
         <div
           role="dialog"
@@ -101,13 +108,14 @@ export const SalonHero: React.FC = () => {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <h2 id="booking-dialog-title" className="text-xl font-serif font-semibold">
-                  Reserve Your Chair at Blossom Salon
+                  Enquire at Blossom Family Salon
                 </h2>
                 <p className="text-xs text-muted-foreground mt-0.5">
-                  Complimentary scalp analysis &amp; espresso included with every session.
+                  Send your preference on WhatsApp. The salon will confirm availability directly.
                 </p>
               </div>
               <button
+                ref={closeButtonRef}
                 type="button"
                 onClick={() => setIsBookingOpen(false)}
                 aria-label="Close booking dialog"
@@ -143,7 +151,7 @@ export const SalonHero: React.FC = () => {
                   htmlFor="salon-service-select"
                   className="block text-xs font-medium text-foreground mb-1.5"
                 >
-                  Select Signature Service
+                  Service of interest
                 </label>
                 <select
                   id="salon-service-select"
@@ -160,28 +168,10 @@ export const SalonHero: React.FC = () => {
               </div>
 
               <div>
-                <span className="block text-xs font-medium text-foreground mb-1.5">
-                  Preferred Time Slot (Today)
-                </span>
-                <div className="grid grid-cols-3 gap-2">
-                  {TIME_SLOTS.map((slot) => {
-                    const active = selectedSlot === slot;
-                    return (
-                      <button
-                        key={slot}
-                        type="button"
-                        onClick={() => setSelectedSlot(slot)}
-                        className={`py-2 px-2.5 rounded-xl border text-xs font-mono tabular-nums font-medium transition-colors cursor-pointer whitespace-nowrap ${
-                          active
-                            ? 'border-foreground bg-foreground text-background'
-                            : 'border-border bg-background text-foreground hover:bg-muted'
-                        }`}
-                      >
-                        {slot}
-                      </button>
-                    );
-                  })}
-                </div>
+                <label htmlFor="preferred-time-input" className="block text-xs font-medium text-foreground mb-1.5">
+                  Preferred date and time
+                </label>
+                <input id="preferred-time-input" type="text" value={selectedSlot} onChange={(event) => setSelectedSlot(event.target.value)} placeholder="e.g. Saturday afternoon" className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20" />
               </div>
 
               {bookingError && (
@@ -202,7 +192,7 @@ export const SalonHero: React.FC = () => {
                   type="submit"
                   className="px-5 py-2.5 rounded-xl bg-foreground text-background text-xs font-semibold hover:opacity-90 transition-opacity cursor-pointer"
                 >
-                  Confirm Chair Reservation
+                  Continue to WhatsApp
                 </button>
               </div>
             </form>

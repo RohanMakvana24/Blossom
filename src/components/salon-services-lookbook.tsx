@@ -30,7 +30,6 @@ export const SalonServicesLookbook: React.FC = () => {
 
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [savedIds, setSavedIds] = useState<Record<string, boolean>>({});
-  const [cartCount, setCartCount] = useState<number>(0);
 
   // Imperative animation engine refs matching the Runway Depth Lookbook rules + mobile responsiveness
   const engineRef = useRef({
@@ -398,7 +397,7 @@ export const SalonServicesLookbook: React.FC = () => {
     <section
       id="services"
       ref={sectionRef}
-      aria-label="Blossom Salon Our Products Collection"
+      aria-label="Illustrative salon product concepts"
       className="vell-lookbook"
     >
       {/* Header Bar */}
@@ -407,7 +406,7 @@ export const SalonServicesLookbook: React.FC = () => {
           {/* Left: Eyebrow + Section Title */}
           <div className="vell-title-block">
             <div className="vell-eyebrow">
-              <span>Blossom Unisex Salon</span>
+              <span>Blossom Family Salon</span>
               <span aria-hidden="true">·</span>
               <span>Hair &amp; Skin Care</span>
             </div>
@@ -438,19 +437,18 @@ export const SalonServicesLookbook: React.FC = () => {
             ))}
           </nav>
 
-          {/* Right: Wishlist & Bag Capsule */}
+          {/* Right: saved visual concepts */}
           <div className="acct">
-            <span className="vell-saved-pill" aria-label="Saved Products">
+            <span className="vell-saved-pill" aria-label="Saved concepts">
               <svg viewBox="0 0 24 24">
                 <path d="M12 20S3.5 15 3.5 9A4.6 4.6 0 0 1 12 6.6 4.6 4.6 0 0 1 20.5 9C20.5 15 12 20 12 20Z" />
               </svg>
               <b>{savedCount}</b>
             </span>
-            <span className="vell-bag-pill">
-              Bag (<span data-testid="service-cart-count">{cartCount}</span>)
-            </span>
+            <span className="vell-bag-pill">Concept preview</span>
           </div>
         </div>
+        <p className="mx-auto max-w-[1400px] px-6 pt-3 text-[11px] leading-5 text-zinc-500 md:px-10">Illustrative product concepts for this demo. Brands, products and retail availability are to be confirmed with the salon.</p>
       </div>
 
       {/* Main Runway Stage + Synchronized Product Cards Rail */}
@@ -459,7 +457,7 @@ export const SalonServicesLookbook: React.FC = () => {
         <section
           ref={stageRef}
           className="stage"
-          aria-label="Unisex salon products showcase. Swipe, drag, scroll or use arrow keys to browse all 8 product lines."
+          aria-label="Illustrative product concepts. Swipe, drag, scroll or use arrow keys to browse all 8 concepts."
           tabIndex={0}
         >
           {/* Receding Runway Line of 8 Luxury Salon Product Flacons */}
@@ -525,7 +523,7 @@ export const SalonServicesLookbook: React.FC = () => {
         </section>
 
         {/* Right-Hand (or Mobile Bottom) Synchronized Looping Retail Products Rail */}
-        <aside ref={railRef} className="rail" aria-label="Salon retail products in this line">
+        <aside ref={railRef} className="rail" aria-label="Illustrative product concepts in this line">
           {UNISEX_SERVICE_ITEMS.map((item, i) => {
             const isSaved = Boolean(savedIds[item.id]);
             return (
@@ -553,7 +551,7 @@ export const SalonServicesLookbook: React.FC = () => {
                   </svg>
                 </button>
 
-                <span className="gender-tag">{item.genderLabel}</span>
+                <span className="gender-tag">Concept art</span>
 
                 <span className="shot">
                   <CardProductSvg cardIndex={i} />
@@ -562,14 +560,8 @@ export const SalonServicesLookbook: React.FC = () => {
                 <div className="meta">
                   <h3>{item.name}</h3>
                   <span>
-                    {item.price} · {item.duration}
+                    Concept only · Details to confirm
                   </span>
-                  <button
-                    type="button"
-                    className="add"
-                    aria-label={`Add ${item.name} to bag`}
-                    onClick={() => setCartCount((c) => c + 1)}
-                  />
                 </div>
               </article>
             );

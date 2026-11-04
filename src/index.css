@@ -48,6 +48,10 @@ body {
   margin: 0;
 }
 
+html { scroll-behavior: smooth; }
+main > section, footer[id] { scroll-margin-top: 84px; }
+@media (max-width: 1199px) { main > section, footer[id] { scroll-margin-top: 60px; } }
+
 /* Blossom Salon — Runway Depth Lookbook Our Products Section */
 .vell-lookbook {
   --u: clamp(0.72px, min(calc(min(100vw, 1400px) / 1400), calc(100vh / 900)), 1px);
@@ -863,3 +867,33 @@ body {
   .services-slider-controls button:focus-visible { outline: 2px solid #c32568; outline-offset: 2px; }
 }
 @media (max-width: 600px) and (prefers-reduced-motion: reduce) { .service-slide .cutout-card { rotate: none; scale: none; } }
+
+/* Dark surfaces retain the editorial rose palette across the hero and services. */
+.dark .blossom-hero { background: #140f15; color: #f8f1f5; }
+.dark .blossom-hero-eyebrow { color: #e3b9cc; }
+.dark .blossom-hero-copy h1 em, .dark .blossom-hero-star { color: #ff6caf; }
+.dark .blossom-hero-description { color: #d0bcc7; }
+.dark .blossom-hero-details, .dark .blossom-hero-bottom { color: #bba5b1; }
+.dark .blossom-hero-book { background: #e60073; }
+.dark .blossom-hero-book:hover { background: #bd005f; }
+.dark .blossom-hero-seal { border-color: #140f15; }
+.dark .salon-services { background: #110e13; color: #f8f1f5; }
+.dark .salon-services-eyebrow { color: #dbb2c6; }
+.dark .salon-services-heading h2 em { color: #ff6caf; }
+.dark .salon-services-heading > p, .dark .salon-services-note { color: #c5afbb; }
+.dark .cutout-card { background: #201a21; border-color: #3c2d37; box-shadow: 0 10px 35px #0005; }
+.dark .cutout-card:hover, .dark .cutout-card:focus-within { box-shadow: 0 16px 45px #0008; }
+.dark .cutout-card-inset, .dark .cutout-card-pin { background: #201a21; color: #201a21; }
+.dark .cutout-card-inset > span, .dark .cutout-card-pin > span { color: #f4a7c8; }
+.dark .cutout-card-content p, .dark .cutout-card-footer > span { color: #cfb8c3; }
+.dark .cutout-card-footer { border-color: #463540; }
+.dark .cutout-card-action a { background: #e60073; }
+.dark .salon-services-note a { color: #ff7cbb; }
+.dark .services-slider-controls > button { border-color: #594050; color: #f8f1f5; }
+.dark .services-slider-dots button::after { background: #755368; }
+.dark .services-slider-dots button[aria-current]::after { background: #ff6caf; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

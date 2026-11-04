@@ -12,20 +12,21 @@ import {
   computeRailCardOffset,
 } from './salon-services-config';
 
-test('UNISEX_SERVICES contains all 8 signature salon product lines in exact order', () => {
+test('UNISEX_SERVICES contains eight illustrative product concepts without prices or efficacy claims', () => {
   assert.equal(UNISEX_SERVICES.length, 8);
   const titles = UNISEX_SERVICES.map((s) => s.title);
   assert.deepEqual(titles, [
-    'Moroccan Argan Gold Elixir',
-    'Keratin & Peptide Silk Masque',
-    'Volcanic Matte Styling Clay',
-    '24K Hydra-Glow Glass Serum',
-    'Bond-Repair Violet Shampoo',
-    'Soie De Rose Hair Parfüm',
-    'Royal Oud Beard & Groom Oil',
-    'Ayurvedic Bhringraj Scalp Tonic',
+    'Hair care',
+    'Colour care',
+    'Styling',
+    'Skin care',
+    'Wash care',
+    'Finishing',
+    'Grooming',
+    'Scalp care',
   ]);
   assert.equal(UNISEX_SERVICE_ITEMS.length, 16);
+  assert.ok(UNISEX_SERVICE_ITEMS.every(item => item.price === 'Illustrative'));
 });
 
 test('wrapMod and computeModelDepth map look positions into [-1, N-1] range', () => {
